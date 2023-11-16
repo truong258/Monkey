@@ -1,5 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import Label from "../components/label/Label";
+import Input from "../components/input/Input";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { IconEyeClose } from "../components/icon";
+
+const schema = yup.object({
+  fullname: yup.string().required("Please enter your fullname"),
+  email: yup
+    .string()
+    .email("Please enter valid email address")
+    .required("Please enter your email address"),
+  password: yup
+    .string()
+    .min(8, "Your password must be at least 8 characters or greater")
+    .required("Please enter your password"),
+});
 
 const SignUpPageStyles = styled.div`
   min-height: 100vh;
@@ -21,12 +40,8 @@ const SignUpPageStyles = styled.div`
     align-items: flex-start;
     row-gap: 20px;
   }
-  .label {
-    color: ${(props) => props.theme.grayDark};
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .input {
+
+  /* .input {
     width: 100%;
     padding: 20px;
     background-color: ${(props) => props.theme.grayLight};
@@ -41,7 +56,7 @@ const SignUpPageStyles = styled.div`
     border-color: ${(props) => props.theme.primary};
 
     outline: none;
-  }
+  } */
   input::-webkit-input-placeholder {
     color: #84878b;
   }
@@ -55,6 +70,12 @@ const SignUpPageStyles = styled.div`
 `;
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
   return (
     <SignUpPageStyles>
       <div className="container">
@@ -62,15 +83,18 @@ const SignUpPage = () => {
         <h1 className="heading">My Blogging</h1>
         <form className="form">
           <div className="feild">
-            <label htmlFor="fullname" className="label">
+            <Label htmlFor="fullname" className="label">
               FullName
-            </label>
-            <input
+            </Label>
+            <Input
               id="fullname"
               type="text"
-              className="input"
+              name="fullname"
               placeholder="Enter your fullname"
-            />
+              control={control}
+            >
+              <IconEyeClose className="input-icon"></IconEyeClose>
+            </Input>
           </div>
         </form>
       </div>

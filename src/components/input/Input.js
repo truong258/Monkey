@@ -7,7 +7,7 @@ const InputStyles = styled.div`
   position: relative;
   width: 100%;
   input {
-    width: 93%;
+    width: ${(props) => (props.hasIcon ? "85%" : "93%")};
     padding: ${(props) =>
       props.hasIcon ? "16px 60px 16px 20px" : "16px 20px"};
     background-color: ${(props) => props.theme.grayLight};
@@ -26,7 +26,7 @@ const InputStyles = styled.div`
   }
   .input-icon {
     position: absolute;
-    right: -14px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;

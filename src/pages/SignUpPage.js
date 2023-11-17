@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { IconEyeClose } from "../components/icon";
+import { IconEyeClose, IconEyeOpen } from "../components/icon";
+import Field from "../components/field/Field";
+import Button from "../components/button/Button";
 
 const schema = yup.object({
   fullname: yup.string().required("Please enter your fullname"),
@@ -34,12 +36,12 @@ const SignUpPageStyles = styled.div`
     font-size: 40px;
     margin-bottom: 60px;
   }
-  .feild {
+  /* .feild {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     row-gap: 20px;
-  }
+  } */
 
   /* .input {
     width: 100%;
@@ -76,13 +78,16 @@ const SignUpPage = () => {
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
+
+  const [togglePassword, setTooglePassword] = useState(false);
+
   return (
     <SignUpPageStyles>
       <div className="container">
         <img srcSet="./logo.png 2x" alt="monkey-blogging" className="logo" />
         <h1 className="heading">My Blogging</h1>
         <form className="form">
-          <div className="feild">
+          <Field>
             <Label htmlFor="fullname" className="label">
               FullName
             </Label>
@@ -92,10 +97,46 @@ const SignUpPage = () => {
               name="fullname"
               placeholder="Enter your fullname"
               control={control}
+            />
+          </Field>
+          <Field>
+            <Label htmlFor="email" className="label">
+              Email
+            </Label>
+            <Input
+              id="email"
+              type="text"
+              name="email"
+              placeholder="Enter your email"
+              control={control}
+            />
+          </Field>
+          <Field>
+            <Label htmlFor="password" className="label">
+              Password
+            </Label>
+            <Input
+              id="password"
+              type={togglePassword ? "text" : "password"}
+              name="password"
+              placeholder="Enter your password"
+              control={control}
             >
-              <IconEyeClose className="input-icon"></IconEyeClose>
+              {!togglePassword ? (
+                <IconEyeClose
+                  onClick={() => setTooglePassword(true)}
+                ></IconEyeClose>
+              ) : (
+                <IconEyeOpen
+                  onClick={() => setTooglePassword(false)}
+                ></IconEyeOpen>
+              )}
             </Input>
-          </div>
+          </Field>
+
+          <Button type="submit" disabled>
+            Sign Up
+          </Button>
         </form>
       </div>
     </SignUpPageStyles>

@@ -11,15 +11,15 @@ import Field from "../components/field/Field";
 import Button from "../components/button/Button";
 
 const schema = yup.object({
-  fullname: yup.string().required("Please enter your fullname"),
+  fullname: yup.string().required("please enter your fullname"),
   email: yup
     .string()
-    .email("Please enter valid email address")
-    .required("Please enter your email address"),
+    .email("Please enter a valid email")
+    .required("please enter your email"),
   password: yup
     .string()
-    .min(8, "Your password must be at least 8 characters or greater")
-    .required("Please enter your password"),
+    .required("please enter your password")
+    .min(8, "your password must be at least 8 character or greater"),
 });
 
 const SignUpPageStyles = styled.div`
@@ -36,12 +36,12 @@ const SignUpPageStyles = styled.div`
     font-size: 40px;
     margin-bottom: 60px;
   }
-  /* .feild {
+  .feild {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     row-gap: 20px;
-  } */
+  }
 
   /* .input {
     width: 100%;
@@ -97,40 +97,8 @@ const SignUpPage = () => {
               name="fullname"
               placeholder="Enter your fullname"
               control={control}
-            />
-          </Field>
-          <Field>
-            <Label htmlFor="email" className="label">
-              Email
-            </Label>
-            <Input
-              id="email"
-              type="text"
-              name="email"
-              placeholder="Enter your email"
-              control={control}
-            />
-          </Field>
-          <Field>
-            <Label htmlFor="password" className="label">
-              Password
-            </Label>
-            <Input
-              id="password"
-              type={togglePassword ? "text" : "password"}
-              name="password"
-              placeholder="Enter your password"
-              control={control}
             >
-              {!togglePassword ? (
-                <IconEyeClose
-                  onClick={() => setTooglePassword(true)}
-                ></IconEyeClose>
-              ) : (
-                <IconEyeOpen
-                  onClick={() => setTooglePassword(false)}
-                ></IconEyeOpen>
-              )}
+              <IconEyeClose className="input-icon"></IconEyeClose>
             </Input>
           </Field>
 

@@ -9,6 +9,10 @@ import * as yup from "yup";
 import { IconEyeClose, IconEyeOpen } from "../components/icon";
 import Field from "../components/field/Field";
 import Button from "../components/button/Button";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from "../firebase/firebase-config";
+import { toast } from "react-toastify";
+import { addDoc, collection } from "firebase/firestore";
 
 const schema = yup.object({
   fullname: yup.string().required("please enter your fullname"),
@@ -80,13 +84,30 @@ const SignUpPage = () => {
   } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
 
   const [togglePassword, setTooglePassword] = useState(false);
+  console.log("cong", 0.1 + 0.2);
+
+  const handleSignUp = async (values) => {
+    if (!isValid) return null;
+    await createUserWithEmailAndPassword(auth, values.email, values.password);
+    await updateProfile(auth.currentUser, {
+      displayName: values.fullname,
+    });
+    const colRef = collection(db, "user");
+    await addDoc(colRef, {
+      fullname: values.fullname,
+      email: values.email,
+      password: values.password,
+    });
+    toast.success("Register successfully!");
+    navigate("/");
+  };
 
   return (
     <SignUpPageStyles>
       <div className="container">
         <img srcSet="./logo.png 2x" alt="monkey-blogging" className="logo" />
         <h1 className="heading">My Blogging</h1>
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit(handleSignUp)}>
           <Field>
             <Label htmlFor="fullname" className="label">
               FullName
@@ -97,14 +118,44 @@ const SignUpPage = () => {
               name="fullname"
               placeholder="Enter your fullname"
               control={control}
+            />
+          </Field>
+          <Field>
+            <Label htmlFor="email" className="label">
+              Email
+            </Label>
+            <Input
+              id="email"
+              type="text"
+              name="email"
+              placeholder="Enter your email"
+              control={control}
+            />
+          </Field>
+          <Field>
+            <Label htmlFor="password" className="label">
+              Password
+            </Label>
+            <Input
+              id="password"
+              type={togglePassword ? "text" : "password"}
+              name="password"
+              placeholder="Enter your password"
+              control={control}
             >
-              <IconEyeClose className="input-icon"></IconEyeClose>
+              {!togglePassword ? (
+                <IconEyeClose
+                  onClick={() => setTooglePassword(true)}
+                ></IconEyeClose>
+              ) : (
+                <IconEyeOpen
+                  onClick={() => setTooglePassword(false)}
+                ></IconEyeOpen>
+              )}
             </Input>
           </Field>
 
-          <Button type="submit" disabled>
-            Sign Up
-          </Button>
+          <Button type="submit">Sign Up</Button>
         </form>
       </div>
     </SignUpPageStyles>

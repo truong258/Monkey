@@ -7,11 +7,8 @@ const InputStyles = styled.div`
   position: relative;
   width: 100%;
   input {
-<<<<<<< HEAD
     width: ${(props) => (props.hasicon ? "85%" : "93%")};
-=======
-    width: 93%;
->>>>>>> parent of 81ac811 (da day duoc disabled)
+
     padding: ${(props) =>
       props.hasicon ? "16px 60px 16px 20px" : "16px 20px"};
     background-color: ${(props) => props.theme.grayLight};
@@ -30,7 +27,7 @@ const InputStyles = styled.div`
   }
   .input-icon {
     position: absolute;
-    right: -14px;
+    right: 15px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;

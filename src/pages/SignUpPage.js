@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -85,6 +85,9 @@ const SignUpPage = () => {
     toast.success("Register successfully!");
     navigate("/");
   };
+  useEffect(() => {
+    document.title = "RegisterPage";
+  }, []);
 
   return (
     <AuhenticationPage>
@@ -135,7 +138,9 @@ const SignUpPage = () => {
             )}
           </Input>
         </Field>
-
+        <div className="have-account">
+          You already an account? <NavLink to={"/sign-in"}>Login</NavLink>
+        </div>
         <Button
           type="submit"
           style={{

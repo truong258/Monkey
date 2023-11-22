@@ -1,6 +1,6 @@
 // import { LoadingSpinner } from "components/loading";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import LoadingSpinner from "../loading/LoadingSpinner";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
@@ -20,11 +20,18 @@ const ButtonStyles = styled.button`
   align-items: center;
   outline: none;
   border: none;
-  background-image: linear-gradient(
-    to right bottom,
-    ${(props) => props.theme.primary},
-    ${(props) => props.theme.secondary}
-  );
+  background-color: white;
+  color: ${(props) => props.theme.primary};
+  ${(props) =>
+    props.kind === "primary" &&
+    css`
+      color: white;
+      background-image: linear-gradient(
+        to right bottom,
+        ${(props) => props.theme.primary},
+        ${(props) => props.theme.secondary}
+      );
+    `};
 
   &:disabled {
     opacity: 0.5;
@@ -66,7 +73,7 @@ const Button = ({
 };
 
 Button.propTypes = {
-  type: PropTypes.oneOf(["button", "submit"]).isRequired,
+  type: PropTypes.oneOf(["button", "submit"]),
   isLoading: PropTypes.bool,
   onClick: PropTypes.func,
   children: PropTypes.node,

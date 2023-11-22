@@ -5,6 +5,7 @@ import Button from "../../components/button/Button";
 const HomeBannerStyles = styled.div`
   min-height: 520px;
   padding: 40px 0;
+  margin-bottom: 30px;
   background-image: linear-gradient(
     to right bottom,
     ${(props) => props.theme.primary},

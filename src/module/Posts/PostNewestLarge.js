@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PostCategory from "./PostCategory";
 
 const PostNewestLargeStyles = styled.div`
   .post-image {
@@ -14,14 +15,9 @@ const PostNewestLargeStyles = styled.div`
     }
   }
   .post-category {
-    display: inline-block;
-    padding: 8px 12px;
-    border-radius: 8px;
-    color: #6b6b6b;
-    font-size: 14px;
-    background-color: #f3deff;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
+
   .post-info {
     display: flex;
     align-items: center;
@@ -55,7 +51,7 @@ const PostNewestLarge = () => {
           alt=""
         />
       </div>
-      <div className="post-category">Kiến thức</div>
+      <PostCategory className="post-category">Kiến thức</PostCategory>
       <h3 className="post-titlle">
         Hướng dẫn setup phòng cực chill cho người mới toàn tập
       </h3>

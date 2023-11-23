@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import PostCategory from "./PostCategory";
+import PostTittle from "./PostTittle";
+import PostInfo from "./PostInfo";
 
 const PostNewestItemStyles = styled.div`
   display: flex;
@@ -41,11 +43,7 @@ const PostNewestItemStyles = styled.div`
     }
   }
   .post-tittle {
-    display: block;
-    line-height: 1.5;
     margin-bottom: 8px;
-    font-size: 16px;
-    font-weight: 600;
   }
 `;
 
@@ -62,14 +60,10 @@ const PostNewestItem = () => {
         <PostCategory type="secondary" className="post-category">
           Kiến thức
         </PostCategory>
-        <h3 className="post-tittle">
+        <PostTittle className="post-tittle">
           Hướng dẫn set up phòng cực chill cho người mới toàn tập
-        </h3>
-        <div className="post-info">
-          <span className="post-time">Mar 23</span>
-          <span className="post-dot"></span>
-          <span className="post-author">Matheo</span>
-        </div>
+        </PostTittle>
+        <PostInfo></PostInfo>
       </div>
     </PostNewestItemStyles>
   );

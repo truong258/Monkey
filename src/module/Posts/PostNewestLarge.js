@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import PostCategory from "./PostCategory";
+import PostTittle from "./PostTittle";
+import PostInfo from "./PostInfo";
 
 const PostNewestLargeStyles = styled.div`
   .post-image {
@@ -33,11 +35,7 @@ const PostNewestLargeStyles = styled.div`
       border-radius: 100rem;
     }
   }
-  .post-titlle {
-    display: block;
-    font-weight: bold;
-    font-size: 22px;
-    line-height: 1.5;
+  .post-tittle {
     margin-bottom: 16px;
   }
 `;
@@ -52,14 +50,11 @@ const PostNewestLarge = () => {
         />
       </div>
       <PostCategory className="post-category">Kiến thức</PostCategory>
-      <h3 className="post-titlle">
+      <PostTittle size="big" className="post-tittle">
         Hướng dẫn setup phòng cực chill cho người mới toàn tập
-      </h3>
-      <div className="post-info">
-        <span className="post-time">Mar 23</span>
-        <span className="post-dot"></span>
-        <span className="post-author">Matheo</span>
-      </div>
+      </PostTittle>
+
+      <PostInfo></PostInfo>
     </PostNewestLargeStyles>
   );
 };

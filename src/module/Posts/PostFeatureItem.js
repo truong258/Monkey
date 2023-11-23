@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import PostCategory from "./PostCategory";
+import PostTittle from "./PostTittle";
+import PostInfo from "./PostInfo";
 
 const PostFeatureItemStyles = styled.div`
   width: 100%;
@@ -40,20 +42,6 @@ const PostFeatureItemStyles = styled.div`
       .post-category {
       }
       .post-info {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-size: 14px;
-        font-weight: 600;
-        color: white;
-        margin-left: auto;
-        .post-dot {
-          display: inline-block;
-          width: 4px;
-          height: 4px;
-          border-radius: 100rem;
-          background-color: currentColor;
-        }
         .post-title {
           font-weight: 600;
           line-height: 1.5;
@@ -81,15 +69,11 @@ const PostFeatureItem = () => {
       <div className="post-content">
         <div className="post-top">
           <PostCategory>Kiến thức</PostCategory>
-          <div className="post-info">
-            <span className="post-time"> Mar 23</span>
-            <span className="post-dot"></span>
-            <span className="post-author">Matheos</span>
-          </div>
+          <PostInfo color="white"></PostInfo>
         </div>
-        <h3 className="post-title">
+        <PostTittle size="big">
           Hướng dẫn người mới setup phòng cực chill toàn tập
-        </h3>
+        </PostTittle>
       </div>
     </PostFeatureItemStyles>
   );

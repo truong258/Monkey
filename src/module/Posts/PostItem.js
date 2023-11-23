@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import PostCategory from "./PostCategory";
+import PostTittle from "./PostTittle";
+import PostInfo from "./PostInfo";
 
 const PostItemStyles = styled.div`
   display: flex;
@@ -37,10 +39,6 @@ const PostItemStyles = styled.div`
     }
   }
   .post-tittle {
-    display: block;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.5;
     margin-bottom: 8px;
   }
 `;
@@ -56,14 +54,11 @@ const PostItem = () => {
       </div>
       <div className="post-content">
         <PostCategory className="post-category">Kiến thức</PostCategory>
-        <h3 className="post-tittle">
+        <PostTittle className="post-tittle">
           Hướng dẫn setup phòng cực chill cho người mới toàn tập
-        </h3>
-        <div className="post-info">
-          <span className="post-time">Mar 23</span>
-          <span className="post-dot"></span>
-          <span className="post-author">Matheo</span>
-        </div>
+        </PostTittle>
+
+        <PostInfo></PostInfo>
       </div>
     </PostItemStyles>
   );
